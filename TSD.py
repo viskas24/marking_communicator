@@ -5,6 +5,8 @@ def clicked():
     HOST = txt1.get()  # The remote host
     PORT = 8899
 
+    print('123')
+
     with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
         s.connect((HOST, PORT))
 
@@ -24,10 +26,25 @@ def clicked():
     txt1.focus()
     txt2.delete(0,END)
 
+def change_focus(event):
+    global i
+    if i==0:
+        txt2.focus()
+        i+=1
+    else:
+        try:
+            clicked()
+        except:
+            lbl4['text'] = "нет связи"
+        i=0
+        txt1.delete(0 ,'end')
+        txt2.delete(0 ,'end')
+        txt1.focus()
 
-
+i = 0
 
 window = Tk()
+window.minsize(width=500, height=400)
 window.title("PDT to SIC sender")
 lbl1 = Label(window, text="SIC IP")
 lbl1.grid(column=0, row=0)
@@ -49,5 +66,8 @@ lbl4 = Label(window, text="Ответ:")
 lbl4.grid(column=0, row=4)
 
 txt1.focus()
+
+window.bind('<Return>', change_focus)
+
 
 window.mainloop()
