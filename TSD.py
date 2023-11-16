@@ -44,26 +44,26 @@ def change_focus(event):
 i = 0
 
 window = Tk()
-window.minsize(width=500, height=400)
+window.minsize(width=300, height=300)
 window.title("PDT to SIC sender")
-lbl1 = Label(window, text="SIC IP")
+lbl1 = Label(window, text="SIC IP",font='Arial 20')
 lbl1.grid(column=0, row=0)
-txt1 = Entry(window, width=10)
-txt1.grid(column=1, row=0)
+txt1 = Entry(window, width=50,font='Arial 12')
+txt1.grid(column=0, row=1)
 
-lbl2 = Label(window, text="Data")
-lbl2.grid(column=0, row=1)
-txt2 = Entry(window, width=10)
-txt2.grid(column=1, row=1)
+lbl2 = Label(window, text="Data",font='Arial 20')
+lbl2.grid(column=0, row=2)
+txt2 = Entry(window, width=50,font='Arial 12')
+txt2.grid(column=0, row=3)
 
 lbl3 = Label(window, text="1. Cканировать IP адрес на контроллере\r2. Сканировать данные для маркировки")
-lbl3.grid(column=0, row=2)
+lbl3.grid(column=0, row=4)
 
-btn = Button(window, text="Send", command=clicked)
-btn.grid(column=0, row=3)
+btn = Button(window, text="Send", command=clicked, width=20, height=5,font='Arial 20')
+btn.grid(column=0, row=5)
 
 lbl4 = Label(window, text="Ответ:")
-lbl4.grid(column=0, row=4)
+lbl4.grid(column=0, row=6)
 
 txt1.focus()
 
