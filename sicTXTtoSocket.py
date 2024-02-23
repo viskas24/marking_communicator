@@ -73,7 +73,6 @@ with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
             translated.append(charmap[symbol])
 
         translated+=b'\r\n'
-        #ser.write(translated)
         s.sendall(translated)  # load file to e10
         print(translated)
         data = s.recv(1024)
