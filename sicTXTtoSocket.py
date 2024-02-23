@@ -1,4 +1,3 @@
-import time
 import csv
 import re
 import argparse
@@ -9,8 +8,6 @@ import socket
 parser = argparse.ArgumentParser()
 parser.add_argument('taskpath')
 parser.add_argument('socketip')
-
-
 
 print(parser.parse_args())
 argv = parser.parse_args()
@@ -27,8 +24,6 @@ for byte, *symbols in charmapreader:
             charmap[symbol] = int(byte)
 
 
-#timeout = 1000
-
 #open task text
 f = open(argv.taskpath, 'r', errors='replace', encoding="UTF-8")
 
@@ -37,9 +32,6 @@ f = open(argv.taskpath, 'r', errors='replace', encoding="UTF-8")
 HOST = argv.socketip  # The remote host
 PORT = 8899
 print(argv.socketip)         # check which port was really used
-
-inputt=1
-answer =b''
 
 
 #check version then send line by line from txt file
@@ -73,7 +65,7 @@ with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
             translated.append(charmap[symbol])
 
         translated+=b'\r\n'
-        s.sendall(translated)  # load file to e10
+        s.sendall(translated)  # load line to e10
         print(translated)
         data = s.recv(1024)
         print(data)
