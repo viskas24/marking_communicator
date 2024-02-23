@@ -1,0 +1,1 @@
+python sicTXTtoSocket.py task.txt 192.168.1.41
