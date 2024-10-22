@@ -5,7 +5,7 @@ import os.path
 import socket
 
 parser = argparse.ArgumentParser()
-parser.add_argument('taskpath')
+parser.add_argument('message')
 parser.add_argument('socketip')
 
 print(parser.parse_args())
@@ -23,9 +23,6 @@ for byte, *symbols in charmapreader:
             charmap[symbol] = int(byte)
 
 
-#open task text
-f = open(argv.taskpath, 'r', errors='replace', encoding="UTF-8")
-
 
 # configure connections (the parameters differs on the device you are connecting to)
 HOST = argv.socketip  # The remote host
@@ -37,17 +34,16 @@ print(argv.socketip)         # check which port was really used
 with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
     s.connect((HOST, PORT))
 
-    s.sendall(b'GETVERSION\r\n')
-    getversionanswer = s.recv(1024)
+    #s.sendall(b'GETVERSION\r\n')
+    #getversionanswer = s.recv(1024)
+    getversionanswer = (b'GETVERSION e10v1-2-3\r')
 
-
-    print(getversionanswer)
+    #print(getversionanswer)
     version = tuple(
         int(x) for x in re.match(b'GETVERSION e(\d+)v(\d+)-(\d+)-(\d+)', getversionanswer).group(1, 2, 3, 4))
     print(version)
 
-    for line in f.readlines():
-        line = line.rstrip()
+    for line in argv.message.split("&"):
 
         command = line.split(' ',1)[0]
         if command=='SETVAR' and version >= (10, 0):
